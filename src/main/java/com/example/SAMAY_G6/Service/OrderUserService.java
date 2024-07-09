@@ -21,6 +21,10 @@ public class OrderUserService {
     return orderUserRepository.save(ordenUsuario);
   }
 
+  public OrdenUsuario updateOrderUser(OrdenUsuario ordenUsuario){
+    return orderUserRepository.save(ordenUsuario);
+  }
+
   public void deleteOrderUsuarioById(Long id) {
     orderUserRepository.deleteById(id);
   }

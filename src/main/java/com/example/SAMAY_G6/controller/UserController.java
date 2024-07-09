@@ -31,6 +31,21 @@ public class UserController {
     return userService.addUser(newUser);
   }
 
+  @PutMapping("/actualizar/usuariocompleto")
+  public Usuario updateUser (@RequestBody Usuario updateinfoUser){
+    return userService.updateTotalUser(updateinfoUser);
+  }
+
+  @PutMapping("/actualizar/nombre/{id}")
+  public Usuario updatePassword(@PathVariable Long id,@RequestParam String nombreNuevo){
+    return userService.updateNombre(id, nombreNuevo);
+  }
+
+  @PutMapping("/actualizar/contrasena/{id}")
+  public Usuario updateContrasena (@PathVariable Long id,@RequestParam String newPas){
+    return userService.updateContrasena(id, newPas);
+  }
+
 
   @DeleteMapping("/{id}")
   public void eliminarUser(@PathVariable Long id) {

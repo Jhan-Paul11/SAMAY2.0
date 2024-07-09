@@ -1,8 +1,10 @@
 package com.example.SAMAY_G6.model;
 
 import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table (name = "User")
@@ -32,8 +34,14 @@ public class Usuario {
   private Date created_at;
 
   @Temporal(TemporalType.TIMESTAMP) //define esta columna como timestap
-  @Column (name = "updated_at", nullable = false)
+  @Column (name = "updated_at",nullable = true)
   private Date updated_at;
+
+//  @OneToMany(mappedBy = "Usuario")
+//  private List<Cliente>ListaUsuario;
+
+  @OneToOne(mappedBy = "usuario")
+  private Cliente cliente;
 
   public Usuario() {
   }
