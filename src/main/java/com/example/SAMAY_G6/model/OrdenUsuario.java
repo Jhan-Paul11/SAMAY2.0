@@ -2,7 +2,9 @@ package com.example.SAMAY_G6.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "OrderUser")
@@ -12,14 +14,24 @@ public class OrdenUsuario {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long orderId;
 
-  //falta agregar la clave foranea clienid.
+  @ManyToMany
+  @JoinTable(
+          name = "orden_producto",
+          joinColumns = @JoinColumn(name = "orden_usuario_id"),
+          inverseJoinColumns = @JoinColumn(name = "producto_id")
+  )
+  private List<Producto> productos;
+
+  @ManyToOne
+  @JoinColumn(name = "cliente_id")
+  private Cliente clientefk;
 
   @Temporal(TemporalType.TIMESTAMP) //define esta columna como timestap
   @Column (name = "created_at", nullable = false)
   private Date created_at;
 
   @Temporal(TemporalType.TIMESTAMP) //define esta columna como timestap
-  @Column (name = "updated_at", nullable = false)
+  @Column (name = "updated_at")
   private Date updated_at;
 
 

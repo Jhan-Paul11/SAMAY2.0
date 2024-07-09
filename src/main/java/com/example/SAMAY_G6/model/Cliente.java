@@ -3,6 +3,7 @@ package com.example.SAMAY_G6.model;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "client")
@@ -15,6 +16,13 @@ public class Cliente {
   @Column(name = "paymentMethod",nullable = false)
   private String paymentMethod;
 
+  @OneToOne
+  @JoinColumn(name = "userId")
+  private Usuario usuario;
+
+  @OneToMany(mappedBy = "clientefk")
+  private List<OrdenUsuario> listaDeOrdenes;
+
   @Temporal(TemporalType.TIMESTAMP) //define esta columna como timestap
   @Column (name = "created_at", nullable = false)
   private Date created_at;
@@ -22,6 +30,10 @@ public class Cliente {
   @Temporal(TemporalType.TIMESTAMP) //define esta columna como timestap
   @Column (name = "updated_at", nullable = false)
   private Date updated_at;
+
+
+
+
 
   public Cliente() {
   }

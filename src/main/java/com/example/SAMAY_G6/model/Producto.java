@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 //@Getter
@@ -26,7 +28,8 @@ public class Producto {
   @Column (name = "unitPrice",nullable = false)
   private double unitPrice;
 
-  //crear la clave foranea de farmer
+  @ManyToMany(mappedBy = "productos")
+  private List<OrdenUsuario> ordenesdeUsuario;
 
   @Temporal(TemporalType.TIMESTAMP) //define esta columna como timestap
   @Column (name = "created_at", nullable = false)
