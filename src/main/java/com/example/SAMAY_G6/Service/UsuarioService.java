@@ -2,18 +2,16 @@ package com.example.SAMAY_G6.Service;
 
 import com.example.SAMAY_G6.Repository.UserRepository;
 import com.example.SAMAY_G6.ResourceNotFoundException;
-import com.example.SAMAY_G6.model.Cliente;
+import com.example.SAMAY_G6.model.DetalleOrden;
 import com.example.SAMAY_G6.model.Usuario;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UsuarioService {
 
   @Autowired
   private UserRepository userRepository;
@@ -22,6 +20,10 @@ public class UserService {
 
   public List<Usuario> getAllUsers() {
     return userRepository.findAll();
+  }
+
+  public Usuario addUsuario(Usuario usuario) {
+    return userRepository.save(usuario);
   }
 
 //  public Usuario addUser(Usuario usuario) {
@@ -44,7 +46,7 @@ public class UserService {
     Optional<Usuario> optionalUsuario= userRepository.findById(id);
     if (optionalUsuario.isPresent()) {
       Usuario existingUser = optionalUsuario.get();
-      existingUser.setFullName(nombreNuevo);
+      existingUser.setNombre(nombreNuevo);
       return userRepository.save(existingUser);
     } else {
       throw new ResourceNotFoundException("Usuario no encontrado con id " + id);

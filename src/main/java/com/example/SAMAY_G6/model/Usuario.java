@@ -7,73 +7,73 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table (name = "User")
-public class Usuario {
+@Table (name = "usuarios") //plural bd
+public class Usuario { //singular java
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long userId;
-
-  @Column (name = "fullName", nullable = false)
-  private String fullName;
-
-  @Column (name = "email", nullable = false)
+  private Integer id;
+  private String nombre;
+  private String username;
   private String email;
-
-  @Column (name = "password", nullable = false)
+  private String direccion;
+  private String telefono;
+  private String tipo;
   private String password;
 
-  @Column (name = "cellphone", nullable = false)
-  private Long cellphone;
+//  @OneToOne(mappedBy = "usuario")
+//  private Cliente cliente;
 
-  @Column (name = "role",nullable = true)
-  private  String role;
 
-  @Temporal(TemporalType.TIMESTAMP) //define esta columna como timestap
-  @Column (name = "created_at", nullable = false)
-  private Date created_at;
+  //-------------------------------------
 
-  @Temporal(TemporalType.TIMESTAMP) //define esta columna como timestap
-  @Column (name = "updated_at",nullable = true)
-  private Date updated_at;
+  @OneToMany(mappedBy = "usuario")
+  private List<Producto> productos;
 
-//  @OneToMany(mappedBy = "Usuario")
-//  private List<Cliente>ListaUsuario;
+  @OneToMany(mappedBy = "usuario")
+  private List<Orden> ordenes;
 
-  @OneToOne(mappedBy = "usuario")
-  private Cliente cliente;
 
   public Usuario() {
   }
 
-  public Usuario(Long userId, String fullName, String email, String password, Long cellphone, String role, Date created_at, Date updated_at) {
-    this.userId = userId;
-    this.fullName = fullName;
+  public Usuario(Integer id, String nombre, String username, String email, String direccion, String telefono, String tipo, String password) {
+    super();
+    this.id = id;
+    this.nombre = nombre;
+    this.username = username;
     this.email = email;
+    this.direccion = direccion;
+    this.telefono = telefono;
+    this.tipo = tipo;
     this.password = password;
-    this.cellphone = cellphone;
-    this.role = role;
-    this.created_at = created_at;
-    this.updated_at = updated_at;
   }
 
   //getter y setter
 
 
-  public Long getUserId() {
-    return userId;
+  public Integer getId() {
+    return id;
   }
 
-  public void setUserId(Long userId) {
-    this.userId = userId;
+  public void setId(Integer id) {
+    this.id = id;
   }
 
-  public String getFullName() {
-    return fullName;
+  public String getNombre() {
+    return nombre;
   }
 
-  public void setFullName(String fullName) {
-    this.fullName = fullName;
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public String getEmail() {
@@ -84,6 +84,30 @@ public class Usuario {
     this.email = email;
   }
 
+  public String getDireccion() {
+    return direccion;
+  }
+
+  public void setDireccion(String direccion) {
+    this.direccion = direccion;
+  }
+
+  public String getTelefono() {
+    return telefono;
+  }
+
+  public void setTelefono(String telefono) {
+    this.telefono = telefono;
+  }
+
+  public String getTipo() {
+    return tipo;
+  }
+
+  public void setTipo(String tipo) {
+    this.tipo = tipo;
+  }
+
   public String getPassword() {
     return password;
   }
@@ -92,35 +116,25 @@ public class Usuario {
     this.password = password;
   }
 
-  public Long getCellphone() {
-    return cellphone;
+  public List<Producto> getProductos() {
+    return productos;
   }
 
-  public void setCellphone(Long cellphone) {
-    this.cellphone = cellphone;
+  public void setProductos(List<Producto> productos) {
+    this.productos = productos;
   }
 
-  public String getRole() {
-    return role;
-  }
-
-  public void setRole(String role) {
-    this.role = role;
-  }
-
-  public Date getCreated_at() {
-    return created_at;
-  }
-
-  public void setCreated_at(Date created_at) {
-    this.created_at = created_at;
-  }
-
-  public Date getUpdated_at() {
-    return updated_at;
-  }
-
-  public void setUpdated_at(Date updated_at) {
-    this.updated_at = updated_at;
+  @Override
+  public String toString() {
+    return "Usuario{" +
+            "id=" + id +
+            ", nombre='" + nombre + '\'' +
+            ", username='" + username + '\'' +
+            ", email='" + email + '\'' +
+            ", direccion='" + direccion + '\'' +
+            ", telefono='" + telefono + '\'' +
+            ", tipo='" + tipo + '\'' +
+            ", password='" + password +
+            '}';
   }
 }
