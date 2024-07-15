@@ -27,6 +27,9 @@ public class Producto {
   @ManyToOne
   private Usuario usuario;
 
+  @ManyToMany(mappedBy = "productos")
+  private List<CarritoCompra> carritos;
+
 
   public Producto() {
   }

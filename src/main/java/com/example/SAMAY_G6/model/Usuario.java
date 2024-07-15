@@ -1,6 +1,7 @@
 package com.example.SAMAY_G6.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.Date;
@@ -13,13 +14,39 @@ public class Usuario { //singular java
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
+
+  @NotBlank(message = "El campo nombre no puede estar en blanco")
+  @Size(min = 5, max = 45,message = "El campo nombre no esta bien")
+  @NotEmpty(message = "El campo nombre no puede estar vacio")
+  @Column(name = "nombre")
   private String nombre;
+
+  @NotBlank(message = "El campo nombre de usuario no puede estar en blanco")
+  @NotEmpty(message = "El campo nombre de usuario no puede estar vacio")
+  @Column(name = "username")
   private String username;
+
+  @NotBlank(message = "El campo correo electronicoe no puede estar en blanco")
+  @NotEmpty(message = "El campo correo electronico no puede estar vacio")
+  @Column(name = "correoElectronico")
+  @Email
   private String email;
+
   private String direccion;
+
+  @NotBlank
+  @Pattern(regexp = "\\d{10}")
   private String telefono;
+
+
   private String tipo;
+
+
+  @NotBlank(message = "El campo contraseña no puede estar en blanco")
+  @NotEmpty(message = "El campo contraseña no puede estar vacio")
+  @Column(name = "password")
   private String password;
+
 
 //  @OneToOne(mappedBy = "usuario")
 //  private Cliente cliente;
@@ -32,6 +59,8 @@ public class Usuario { //singular java
 
   @OneToMany(mappedBy = "usuario")
   private List<Orden> ordenes;
+
+
 
 
   public Usuario() {
