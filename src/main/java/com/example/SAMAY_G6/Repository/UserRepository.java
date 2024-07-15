@@ -12,5 +12,6 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<Usuario, Long> {
 //  @Query("SELECT t FROM todo t WHERE t.terminada =true")
 //  List<ToDo> findTodasTareasCompletadas();
+Optional<Usuario> findByUsername(String username);
 Optional<Usuario> findByEmail(String email);
 }

@@ -5,6 +5,7 @@ import com.example.SAMAY_G6.Service.UsuarioService;
 import com.example.SAMAY_G6.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.authentication.AuthenticationManager;
 
 import java.util.List;
 
