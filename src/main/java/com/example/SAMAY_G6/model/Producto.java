@@ -1,10 +1,7 @@
 package com.example.SAMAY_G6.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,45 +9,38 @@ import java.util.List;
 //@Getter
 //@Setter
 @Entity
-@Table(name = "product")
+@Table(name = "productos")
 public class Producto {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private  Long productId;
-
-  @Column(name = "productName",nullable = false)
-  private String productName;
-
-  @Column (name = "stock",nullable = false)
-  private  int stock;
-
-  @Column (name = "unitPrice",nullable = false)
-  private double unitPrice;
+  private String nombre;
+  private String descripcion;
+  private String imagen;
+  private double precio;
+  private int cantidad;
 
   @ManyToMany(mappedBy = "productos")
-  private List<OrdenUsuario> ordenesdeUsuario;
+  private List<Orden> ordenes;
 
-  @Temporal(TemporalType.TIMESTAMP) //define esta columna como timestap
-  @Column (name = "created_at", nullable = false)
-  private Date created_at;
+  @ManyToOne
+  private Usuario usuario;
 
-  @Temporal(TemporalType.TIMESTAMP) //define esta columna como timestap
-  @Column (name = "updated_at", nullable = false)
-  private Date updated_at;
 
   public Producto() {
   }
 
-  public Producto(Long productId, String productName, int stock, double unitPrice, Date created_at, Date updated_at) {
+  public Producto(Long productId, String nombre, String descripcion, String imagen, double precio, int cantidad) {
+    super();
     this.productId = productId;
-    this.productName = productName;
-    this.stock = stock;
-    this.unitPrice = unitPrice;
-    this.created_at = created_at;
-    this.updated_at = updated_at;
+    this.nombre = nombre;
+    this.descripcion = descripcion;
+    this.imagen = imagen;
+    this.precio = precio;
+    this.cantidad = cantidad;
   }
-  //getter y setter
+//getter y setter
 
 
   public Long getProductId() {
@@ -61,44 +51,58 @@ public class Producto {
     this.productId = productId;
   }
 
-  public String getProductName() {
-    return productName;
+  public String getNombre() {
+    return nombre;
   }
 
-  public void setProductName(String productName) {
-    this.productName = productName;
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
   }
 
-  public int getStock() {
-    return stock;
+  public String getDescripcion() {
+    return descripcion;
   }
 
-  public void setStock(int stock) {
-    this.stock = stock;
+  public void setDescripcion(String descripcion) {
+    this.descripcion = descripcion;
   }
 
-  public double getUnitPrice() {
-    return unitPrice;
+  public String getImagen() {
+    return imagen;
   }
 
-  public void setUnitPrice(double unitPrice) {
-    this.unitPrice = unitPrice;
+  public void setImagen(String imagen) {
+    this.imagen = imagen;
   }
 
-  public Date getCreated_at() {
-    return created_at;
+  public double getPrecio() {
+    return precio;
   }
 
-  public void setCreated_at(Date created_at) {
-    this.created_at = created_at;
+  public void setPrecio(double precio) {
+    this.precio = precio;
   }
 
-  public Date getUpdated_at() {
-    return updated_at;
+  public int getCantidad() {
+    return cantidad;
   }
 
-  public void setUpdated_at(Date updated_at) {
-    this.updated_at = updated_at;
+  public void setCantidad(int cantidad) {
+    this.cantidad = cantidad;
+  }
+
+
+
+  @Override
+  public String toString() {
+    return "Producto{" +
+            "productId=" + productId +
+            ", nombre='" + nombre + '\'' +
+            ", descripcion='" + descripcion + '\'' +
+            ", imagen='" + imagen + '\'' +
+            ", precio=" + precio +
+            ", cantidad=" + cantidad +
+            '}';
   }
 }
 
